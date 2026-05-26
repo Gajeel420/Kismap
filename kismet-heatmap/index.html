@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kismet Heatmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sidebar">
+        <div class="header">
+            <h1>Kismet Heatmap</h1>
+            <p>Real-time Signal Analysis</p>
+        </div>
+        
+        <div class="control-group">
+            <label for="kismet-url">Kismet API URL</label>
+            <input type="text" id="kismet-url" value="http://localhost:2501" placeholder="http://127.0.0.1:2501">
+        </div>
+        
+        <div class="control-group">
+            <label for="kismet-auth">API Token / Auth (Optional)</label>
+            <input type="password" id="kismet-auth" placeholder="Username:Password or Token">
+        </div>
+
+        <div class="control-group">
+            <button id="connect-btn" class="primary-btn">Connect & Poll</button>
+        </div>
+
+        <div class="filters">
+            <h3>Filters</h3>
+            <div class="control-group">
+                <label for="filter-ssid">SSID (regex supported)</label>
+                <input type="text" id="filter-ssid" placeholder="e.g. .*guest.*">
+            </div>
+            <div class="control-group">
+                <label for="filter-bssid">BSSID</label>
+                <input type="text" id="filter-bssid" placeholder="e.g. AA:BB:CC:...">
+            </div>
+            <div class="control-group">
+                <label>Device Type</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="type-ap" checked> Access Point (AP)</label>
+                    <label><input type="checkbox" id="type-client" checked> Client</label>
+                    <label><input type="checkbox" id="type-bridge" checked> Bridged/Other</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-panel">
+            <p>Status: <span id="status-text">Disconnected</span></p>
+            <p>Devices mapped: <span id="device-count">0</span></p>
+        </div>
+    </div>
+    
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
